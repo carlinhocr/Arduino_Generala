@@ -4,17 +4,18 @@
 #include "MyDice.h"
 class Generala {
 public:
-        Generala();
+        Generala(int numberOfPlayers);
         void twoDiceConcurrently();
 private:
         int _buttonGeneral;
         int _diceButton1;
         int _diceButton2;
+        int _numberOfPlayers;
         int _iterateDice[2];
         int _randomDiceNumber[2];
         int _buttonStopDicePin[2];
-        MyDice dice1;
-        MyDice dice2;
+        dice1 = MyDice;
+        dice2 = MyDice;
         MyDice _AllDice[2];
         void acknowledgeButtonPress(int diceNumber);
         void checkDiceStopStartButton();
