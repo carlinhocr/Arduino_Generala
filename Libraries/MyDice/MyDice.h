@@ -3,8 +3,7 @@
 #include "Arduino.h"
 class MyDice {
 public:
-        MyDice(int diceDiagonal1, int diceDiagonal2,
-        int diceMiddleLeds, int diceCenterLed);
+        MyDice(int diceDiagonal1=33, int diceDiagonal2=34,int diceMiddleLeds=35, int diceCenterLed=36);
         void rollDice();
         void throwDice();
         void turnOffDice();

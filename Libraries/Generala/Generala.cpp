@@ -1,7 +1,7 @@
 #include "Arduino.h"
 #include "MyDice.h"
 #include "Generala.h"
-Generala::Generala(int numberOfPlayers) {
+Generala::Generala(int numberOfPlayers,int pinsDice1[4], int pinsDice2[4]){
         int _buttonGeneral = 2;
         int _diceButton1=11;
         int _diceButton2=12;
@@ -12,10 +12,11 @@ Generala::Generala(int numberOfPlayers) {
         Serial.println("hola en la clase Generala");
         int _iterateDice[2] = {1,1}; //1, 1
         int _randomDiceNumber[2] = {0,0}; //1, 1
-        int _buttonStopDicePin[2] = {11,12};
-        dice1(6,3,5,4);
-        dice2(7,8,9,10);
-        _AllDice[2] = {dice1,dice2};
+        int _buttonStopDicePin[2] = {11,12};  
+        MyDice dice1(pinsDice1[0],pinsDice1[1],pinsDice1[2],pinsDice1[3]);
+        MyDice dice2(pinsDice2[0],pinsDice2[1],pinsDice2[2],pinsDice2[3]);
+        MyDice _AllDice[2] = {MyDice(pinsDice1[0],pinsDice1[1],pinsDice1[2],pinsDice1[3]),MyDice(pinsDice2[0],pinsDice2[1],pinsDice2[2],pinsDice2[3])}; 
+           
 }
 
 void Generala::acknowledgeButtonPress(int diceNumber){
@@ -99,6 +100,8 @@ void Generala::throwDice() {
 }
 
 void Generala::twoDiceConcurrently(){
+  // MyDice dice1 = MyDice(6,3,5,4);
+  // MyDice dice2 = MyDice(7,8,9,10);
   checkButton();
   throwDice();
 }

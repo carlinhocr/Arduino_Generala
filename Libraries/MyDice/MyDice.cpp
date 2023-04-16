@@ -1,7 +1,6 @@
 #include "Arduino.h"
 #include "MyDice.h"
-MyDice::MyDice(int diceDiagonal1, int diceDiagonal2,
-        int diceMiddleLeds, int diceCenterLed) {
+MyDice::MyDice(int diceDiagonal1, int diceDiagonal2,int diceMiddleLeds, int diceCenterLed) {
         pinMode(diceDiagonal1, OUTPUT);
         pinMode(diceDiagonal2, OUTPUT);
         pinMode(diceMiddleLeds, OUTPUT);
@@ -18,6 +17,7 @@ MyDice::MyDice(int diceDiagonal1, int diceDiagonal2,
         _diceDiagonal2 = diceDiagonal2;
         _diceMiddleLeds = diceMiddleLeds;
         _diceCenterLed = diceCenterLed;
+        Serial.println("_diceDiagonal1"+_diceDiagonal1);
         _dice[0] = _diceDiagonal1;
         _dice[1] = _diceDiagonal2;
         _dice[2] = _diceMiddleLeds;

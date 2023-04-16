@@ -17,7 +17,7 @@ void acknowledgeButtonPress(int diceNumber){
 }
 
 void checkDiceStopStartButton(){
-    for  (int diceNumber = 0; diceNumber < 2; diceNumber ++){
+    for  (int diceNumber = 0; diceNumber < 2; diceNumber ++){ // maybe use len(_AllDice) instead of two
       if (digitalRead(_buttonStopDicePin[diceNumber]) == LOW){
         if (_iterateDice[diceNumber] == 1){
           _iterateDice[diceNumber] = 0 ; // 0 means do not roll leave as is    
