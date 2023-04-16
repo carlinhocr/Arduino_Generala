@@ -13,8 +13,8 @@ Generala::Generala(int numberOfPlayers,int pinsDice1[4], int pinsDice2[4]){
         int _iterateDice[2] = {1,1}; //1, 1
         int _randomDiceNumber[2] = {0,0}; //1, 1
         int _buttonStopDicePin[2] = {11,12};  
-        MyDice dice1(pinsDice1[0],pinsDice1[1],pinsDice1[2],pinsDice1[3]);
-        MyDice dice2(pinsDice2[0],pinsDice2[1],pinsDice2[2],pinsDice2[3]);
+        MyDice dice1 = MyDice(pinsDice1[0],pinsDice1[1],pinsDice1[2],pinsDice1[3]);
+        MyDice dice2 = MyDice(pinsDice2[0],pinsDice2[1],pinsDice2[2],pinsDice2[3]);
         MyDice _AllDice[2] = {MyDice(pinsDice1[0],pinsDice1[1],pinsDice1[2],pinsDice1[3]),MyDice(pinsDice2[0],pinsDice2[1],pinsDice2[2],pinsDice2[3])}; 
            
 }
