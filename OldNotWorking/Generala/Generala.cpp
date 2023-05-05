@@ -1,75 +1,22 @@
 #include "Arduino.h"
 #include "MyDice.h"
 #include "Generala.h"
-
-
-Generala::Generala(){
-  Serial.println("hola en la clase Generala DEFAULT CONSTRUCTOR");
-  
-  // defaults
-  for (int i=0;i<4;i++){
-    _pinsDice1[i]=defaultPins[i];
-    _pinsDice2[i]=defaultPins[i];
-  };
-  _numberOfPlayers = 2;
-
-  _buttonGeneral = 2;
-  _diceButton1=11;
-  _diceButton2=12;
-  for (int i=0;i<2;i++){
-    _iterateDice[i] = 1; //1, 1
-    _randomDiceNumber[i] = 0; //1, 1
-  };
-  _buttonStopDicePin[0] = _diceButton1;  
-  _buttonStopDicePin[1] = _diceButton2;
-
-  setPins(_numberOfPlayers,_pinsDice1[4],_pinsDice2[4]);
-
-  pinMode(_buttonGeneral, INPUT_PULLUP);
-  pinMode(_diceButton1, INPUT_PULLUP);
-  pinMode(_diceButton2, INPUT_PULLUP);
-}
 Generala::Generala(int numberOfPlayers,int pinsDice1[4], int pinsDice2[4]){
-  Serial.println("hola en la clase Generala");
-  _buttonGeneral = 2;
-  _diceButton1=11;
-  _diceButton2=12;
-  for (int i=0;i<2;i++){
-    _iterateDice[i] = 1; //1, 1
-    _randomDiceNumber[i] = 0; //1, 1
-  };
-  _buttonStopDicePin[0] = _diceButton1;  
-  _buttonStopDicePin[1] = _diceButton2;
-
-  setPins(numberOfPlayers,pinsDice1[4],pinsDice2[4]);
-
-  pinMode(_buttonGeneral, INPUT_PULLUP);
-  pinMode(_diceButton1, INPUT_PULLUP);
-  pinMode(_diceButton2, INPUT_PULLUP);
-}
-
-void Generala::setPins(int numberOfPlayers,int pinsDice1[4], int pinsDice2[4]){
-  _numberOfPlayers = numberOfPlayers;
-  Serial.println("Setting Pins");
-  for (int i=0;i<4;i++){
-    _pinsDice1[i]=pinsDice1[i];
-    _pinsDice2[i]=pinsDice2[i];
-  };
-  Serial.print("Setting Pins Dice 1 ");
-  for (int i=0;i<4;i++){
-    Serial.print(_pinsDice1[i]);
-    Serial.print(",");
-  };
-  Serial.println(" ");
-  Serial.print("Setting Pins Dice 2 ");
-  for (int i=0;i<4;i++){
-    Serial.print(_pinsDice2[i]);
-    Serial.print(",");
-  };
-  Serial.println(" ");
-  Serial.print("Setting MyDice from Generala ");
-  _AllDice[0].setPins(_pinsDice1[0],_pinsDice1[1],_pinsDice1[2],_pinsDice1[3]);
-  _AllDice[1].setPins(_pinsDice2[0],_pinsDice2[1],_pinsDice2[2],_pinsDice2[3]);
+        int _buttonGeneral = 2;
+        int _diceButton1=11;
+        int _diceButton2=12;
+        int _numberOfPlayers = numberOfPlayers;
+        pinMode(_buttonGeneral, INPUT_PULLUP);
+        pinMode(_diceButton1, INPUT_PULLUP);
+        pinMode(_diceButton2, INPUT_PULLUP);
+        Serial.println("hola en la clase Generala");
+        int _iterateDice[2] = {1,1}; //1, 1
+        int _randomDiceNumber[2] = {0,0}; //1, 1
+        int _buttonStopDicePin[2] = {11,12};  
+        MyDice dice1 = MyDice(pinsDice1[0],pinsDice1[1],pinsDice1[2],pinsDice1[3]);
+        MyDice dice2 = MyDice(pinsDice2[0],pinsDice2[1],pinsDice2[2],pinsDice2[3]);
+        MyDice _AllDice[2] = {MyDice(pinsDice1[0],pinsDice1[1],pinsDice1[2],pinsDice1[3]),MyDice(pinsDice2[0],pinsDice2[1],pinsDice2[2],pinsDice2[3])}; 
+           
 }
 
 void Generala::acknowledgeButtonPress(int diceNumber){
@@ -160,6 +107,6 @@ void Generala::twoDiceConcurrently(){
 }
 
 void Generala::oneDiceWithButton(){
-  _AllDice[0].rollDice();
+  dice1.rollDice();
 }
 

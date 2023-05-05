@@ -4,13 +4,11 @@
 class MyDice {
 public:
         MyDice(int diceDiagonal1=33, int diceDiagonal2=34,int diceMiddleLeds=35, int diceCenterLed=36);
-        //MyDice(int diceDiagonal1=0, int diceDiagonal2=0,int diceMiddleLeds=0, int diceCenterLed=0);
         void rollDice();
         void throwDice();
         void turnOffDice();
         void lightNumber(int number);
         void flashAllLeds(int flashTimes, int delayLed);
-        void setPins(int diceDiagonal1, int diceDiagonal2,int diceMiddleLeds, int diceCenterLed);
 private:
         int _diceDiagonal1;
         int _diceDiagonal2;
