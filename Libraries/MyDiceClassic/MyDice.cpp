@@ -1,7 +1,12 @@
 #include "Arduino.h"
 #include "MyDice.h"
-MyDice::MyDice(int diceDiagonal1,int diceMiddleLeds, int diceDiagonal2, int diceCenterLed) {
-        Serial.println("hola en clase MyDice");
+MyDice::MyDice(int diceDiagonal1, int diceMiddleLeds,int diceDiagonal2,
+         int diceCenterLed) {
+        pinMode(diceDiagonal1, OUTPUT);
+        pinMode(diceDiagonal2, OUTPUT);
+        pinMode(diceMiddleLeds, OUTPUT);
+        pinMode(diceCenterLed, OUTPUT);
+        Serial.println("hola");
         lenghtDice =  4;
         lenghtNumber1 =  1;
         lenghtNumber2 =  1;
@@ -9,36 +14,28 @@ MyDice::MyDice(int diceDiagonal1,int diceMiddleLeds, int diceDiagonal2, int dice
         lenghtNumber4 =  2;
         lenghtNumber5 =  3;
         lenghtNumber6 =  3;
-        setPins(diceDiagonal1,diceDiagonal2,diceMiddleLeds,diceCenterLed);
-    }
+        _diceDiagonal1 = diceDiagonal1;
+        _diceDiagonal2 = diceDiagonal2;
+        _diceMiddleLeds = diceMiddleLeds;
+        _diceCenterLed = diceCenterLed;
+        _dice[0] = _diceDiagonal1;
+        _dice[1] = _diceDiagonal2;
+        _dice[2] = _diceMiddleLeds;
+        _dice[3] = _diceCenterLed;
+        number1[0] = _diceCenterLed;
+        number2[0] = _diceDiagonal1;
+        number3[0] = _diceCenterLed;
+        number3[1] = _diceDiagonal1;
+        number4[0] = _diceDiagonal1;
+        number4[1] = _diceDiagonal2;
+        number5[0] = _diceDiagonal1;
+        number5[1] = _diceDiagonal2;
+        number5[2] = _diceCenterLed;
+        number6[0] = _diceDiagonal1;
+        number6[1] = _diceDiagonal2;
+        number6[2] = _diceMiddleLeds;
 
-void MyDice::setPins(int diceDiagonal1, int diceDiagonal2,int diceMiddleLeds, int diceCenterLed){
-  Serial.println("Seteando pines en clase MyDice");
-  _diceDiagonal1 = diceDiagonal1;
-  _diceDiagonal2 = diceDiagonal2;
-  _diceMiddleLeds = diceMiddleLeds;
-  _diceCenterLed = diceCenterLed;
-  pinMode(_diceDiagonal1, OUTPUT);
-  pinMode(_diceDiagonal2, OUTPUT);
-  pinMode(_diceMiddleLeds, OUTPUT);
-  pinMode(_diceCenterLed, OUTPUT);
-  _dice[0] = _diceDiagonal1;
-  _dice[1] = _diceDiagonal2;
-  _dice[2] = _diceMiddleLeds;
-  _dice[3] = _diceCenterLed;
-  number1[0] = _diceCenterLed;
-  number2[0] = _diceDiagonal1;
-  number3[0] = _diceCenterLed;
-  number3[1] = _diceDiagonal1;
-  number4[0] = _diceDiagonal1;
-  number4[1] = _diceDiagonal2;
-  number5[0] = _diceDiagonal1;
-  number5[1] = _diceDiagonal2;
-  number5[2] = _diceCenterLed;
-  number6[0] = _diceDiagonal1;
-  number6[1] = _diceDiagonal2;
-  number6[2] = _diceMiddleLeds;
-}
+    }
 
 void MyDice::rollDice(){
   //iterateLeds(_dice,lenghtDice);
