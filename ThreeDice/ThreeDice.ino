@@ -6,12 +6,13 @@ int _diceButton2=12;
 int _diceButton3=20;
 const int _diceTotal = 3;
 int _iterateDice[_diceTotal] = {1,1,1}; //1, 2
-int _randomDiceNumber[_diceTotal] = {0,0.0}; //1, 2
+int _randomDiceNumber[_diceTotal] = {0,0,0}; //1, 2
 int _buttonStopDicePin[_diceTotal] = {11,12,12};
 
-MyDice dice1(47,49,51,53);
+//MyDice dice1(47,49,51,53);
 MyDice dice2(39,41,43,45);
 MyDice dice3(31,33,35,37);
+MyDice dice1(46,48,50,52);
 MyDice _AllDice[_diceTotal] = {dice1,dice2,dice3};
 
 void acknowledgeButtonPress(int diceNumber){
