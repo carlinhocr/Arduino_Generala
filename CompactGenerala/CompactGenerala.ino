@@ -5,6 +5,16 @@ int _diceButton2=12;
 int _diceButton3=20;
 const int _diceTotal = 5;
 const int lenghtDice = 4 ; //amount of pins dice
+const int lenghtNumber1 =  1;
+const int lenghtNumber2 =  1;
+const int lenghtNumber3 =  2;
+const int lenghtNumber4 =  2;
+const int lenghtNumber5 =  3;
+const int lenghtNumber6 =  3;
+int _diceDiagonal1 = 0;
+int _diceDiagonal2 = 0;
+int _diceMiddleLeds = 0;
+int _diceCenterLed = 0;
 int _iterateDice[_diceTotal] = {1,1,1,1,1}; //1, 2
 int _randomDiceNumber[_diceTotal] = {0,0,0,0,0}; //1, 2
 int _buttonStopDicePin[_diceTotal] = {11,12,12,12,12};
@@ -40,13 +50,101 @@ void flashLeds(int toLight[], int lenghtToLight, int flashTimes = 5, int delayLe
   };
 }
 
+void lightNumber(int tolight[], int number){
+  _diceDiagonal1 = tolight[0];
+  _diceMiddleLeds = tolight[1];
+  _diceDiagonal2 = tolight[2];
+  _diceCenterLed = tolight[3];
+  int number1[1] = {_diceCenterLed};
+  int number2[1] = {_diceDiagonal1};
+  int number3[2] = {_diceCenterLed, _diceDiagonal1};
+  int number4[2] = {_diceDiagonal1, _diceDiagonal2};
+  int number5[3] = {_diceDiagonal1,_diceDiagonal2,_diceCenterLed};
+  int number6[3] = {_diceDiagonal1,_diceDiagonal2,_diceMiddleLeds};
+  Serial.println(_diceDiagonal1);
+  Serial.println(number1[0]);
+  switch (number)  { 
+    case 1:
+        turnOnLeds(number1, lenghtNumber1);
+        break;
+    case 2:
+        turnOnLeds(number2, lenghtNumber2);
+        break;
+    case 3:
+        turnOnLeds(number3, lenghtNumber3);
+        break;
+    case 4:
+        turnOnLeds(number4, lenghtNumber4);
+        break;
+    case 5:
+        turnOnLeds(number5, lenghtNumber5);
+        break;
+    case 6:
+        turnOnLeds(number6, lenghtNumber6);
+        break;
+    default:
+        //do nothing
+        Serial.println("Not a valid dice number");
+        Serial.println(number);
+        break;
+  };
+}
+
 void acknowledgeButtonPress(int diceNumber){
-  Serial.println(diceNumber);
-  Serial.println(_AllDice[diceNumber]);
+  // Serial.println(diceNumber);
+  // Serial.println(_AllDice[diceNumber]);
   flashLeds(_AllDice[diceNumber],lenghtDice,6,100);
   //_AllDice[diceNumber].flashAllLeds(diceNumber,2,200);
+  lightNumber(_AllDice[diceNumber],_randomDiceNumber[diceNumber]);
   //_AllDice[diceNumber].lightNumber(_randomDiceNumber[diceNumber]);
 }
+
+void throwDice() {
+  int throwTimes = random(1,4);
+  Serial.println("En Throw dice");
+  randomSeed(millis()); //to have different randoms numbers each time the sketch runs
+  // for (int i = 0; i < throwTimes; i++){
+  //   iterateNumbers();
+  // };  
+  assignRandomNumber();
+  lightDiceRamdomNumber();
+  delay(20);
+}
+
+void assignRandomNumber(){
+  for  (int diceNumber = 0; diceNumber < _diceTotal; diceNumber ++){
+    if (_iterateDice[diceNumber] == 1){
+      _randomDiceNumber[diceNumber] = random(1,7);
+    };
+  };
+}
+
+void lightDiceRamdomNumber(){
+  for  (int diceNumber = 0; diceNumber < _diceTotal; diceNumber ++){
+    if (_iterateDice[diceNumber] == 1){
+      lightNumber(_AllDice[diceNumber],_randomDiceNumber[diceNumber]);
+      //_AllDice[diceNumber].lightNumber(_randomDiceNumber[diceNumber]);
+      Serial.println(_randomDiceNumber[diceNumber]);
+    };
+  };
+}
+
+// void throwDice() {
+//   //light up dice randomly
+//   //turn on dice number
+//   Serial.println("En Throw dice");
+//   randomSeed(millis()); //to have different randoms numbers each time the sketch runs
+//   int diceNumber = random(1,7);
+//   int throwTimes = random(1,4);
+//   Serial.println("diceNumber");
+//   Serial.println(diceNumber);
+//   // for (int i = 0; i < throwTimes; i++){
+//   //   iterateNumbers(_dice,lenghtDice,200);
+//   // }  
+//   lightNumber(diceNumber);
+//   delay(20);
+// }
+
 /*
 void checkDiceStopStartButton(){
     for  (int diceNumber = 0; diceNumber < _diceTotal; diceNumber ++){ // maybe use len(_AllDice) instead of two
@@ -153,7 +251,11 @@ void loop() {
   //Serial.println(digitalRead(2));
   //dice1.rollDice();
   //twoDiceConcurrently();
-  for  (int i = 0; i < 5; i ++){
-    acknowledgeButtonPress(i);
+  //acknowledgeButtonPress(1);
+  for  (int j = 1; j < 6; j ++){
+    for  (int i = 0; i < 5; i ++){
+      lightNumber(_AllDice[i],6);
+      delay(100);
+    }
   }
 }
