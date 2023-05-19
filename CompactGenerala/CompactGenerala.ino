@@ -162,7 +162,7 @@ void iterateNumbers(){
     if (_iterateDice[diceNumber] == 1){
       turnOffLeds(_AllDice[diceNumber],lenghtDice);
       //_AllDice[diceNumber].turnOffDice();
-      delay(300);
+      //delay(300);
     };
   };
   for (int position = 1; position < 7; position++) {
