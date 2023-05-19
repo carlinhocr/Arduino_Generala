@@ -61,8 +61,8 @@ void lightNumber(int tolight[], int number){
   int number4[2] = {_diceDiagonal1, _diceDiagonal2};
   int number5[3] = {_diceDiagonal1,_diceDiagonal2,_diceCenterLed};
   int number6[3] = {_diceDiagonal1,_diceDiagonal2,_diceMiddleLeds};
-  Serial.println(_diceDiagonal1);
-  Serial.println(number1[0]);
+  //Serial.println(_diceDiagonal1);
+  //Serial.println(number1[0]);
   switch (number)  { 
     case 1:
         turnOnLeds(number1, lenghtNumber1);
@@ -127,6 +127,11 @@ void lightDiceRamdomNumber(){
       Serial.println(_randomDiceNumber[diceNumber]);
     };
   };
+}
+
+void AllDice(){
+  checkButton();
+  throwDice();
 }
 
 // void throwDice() {
@@ -222,10 +227,7 @@ void throwDice() {
   delay(20);
 }
 
-void twoDiceConcurrently(){
-  checkButton();
-  throwDice();
-}
+
 
 void oneDiceWithButton(){
   dice1.rollDice();
@@ -244,7 +246,7 @@ void setup() {
     pinMode(pin,OUTPUT);
     //digitalWrite(pin,HIGH);
   }
-
+  throwDice();
 }
 
 void loop() {
@@ -252,10 +254,11 @@ void loop() {
   //dice1.rollDice();
   //twoDiceConcurrently();
   //acknowledgeButtonPress(1);
-  for  (int j = 1; j < 6; j ++){
-    for  (int i = 0; i < 5; i ++){
-      lightNumber(_AllDice[i],6);
-      delay(100);
-    }
-  }
+  // for  (int j = 1; j < 6; j ++){
+  //   for  (int i = 0; i < 5; i ++){
+  //     lightNumber(_AllDice[i],6);
+  //     delay(100);
+  //   }
+  // }
+  
 }
