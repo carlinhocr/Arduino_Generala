@@ -103,9 +103,9 @@ void throwDice() {
   int throwTimes = random(1,4);
   Serial.println("En Throw dice");
   randomSeed(millis()); //to have different randoms numbers each time the sketch runs
-  // for (int i = 0; i < throwTimes; i++){
-  //   iterateNumbers();
-  // };  
+  for (int i = 0; i < throwTimes; i++){
+    iterateNumbers();
+  };  
   assignRandomNumber();
   lightDiceRamdomNumber();
   delay(20);
@@ -125,6 +125,56 @@ void lightDiceRamdomNumber(){
       lightNumber(_AllDice[diceNumber],_randomDiceNumber[diceNumber]);
       //_AllDice[diceNumber].lightNumber(_randomDiceNumber[diceNumber]);
       Serial.println(_randomDiceNumber[diceNumber]);
+    };
+  };
+}
+
+void checkButton() {
+  delay (50);
+  while (digitalRead(_buttonGeneral) == LOW) {
+    checkDiceStopStartButton();
+    delay(100);
+  };
+  delay (50);
+  while (digitalRead(_buttonGeneral) == HIGH) {
+    checkDiceStopStartButton();  
+    delay(100);
+  };
+  randomSeed(millis());
+}
+
+void checkDiceStopStartButton(){
+    for  (int diceNumber = 0; diceNumber < _diceTotal; diceNumber ++){ // maybe use len(_AllDice) instead of two
+      if (digitalRead(_buttonStopDicePin[diceNumber]) == LOW){
+        if (_iterateDice[diceNumber] == 1){
+          _iterateDice[diceNumber] = 0 ; // 0 means do not roll leave as is    
+        }
+        else {
+          _iterateDice[diceNumber] = 1;          
+        };  
+        acknowledgeButtonPress(diceNumber);
+      };
+    };      
+}
+
+void iterateNumbers(){
+  for  (int diceNumber = 0; diceNumber < _diceTotal; diceNumber ++){
+    if (_iterateDice[diceNumber] == 1){
+      turnOffLeds(_AllDice[diceNumber],lenghtDice);
+      //_AllDice[diceNumber].turnOffDice();
+      delay(300);
+    };
+  };
+  for (int position = 1; position < 7; position++) {
+    for  (int diceNumber = 0; diceNumber < _diceTotal; diceNumber ++){
+      if (_iterateDice[diceNumber] == 1){
+          lightNumber(_AllDice[diceNumber],position);
+          //_AllDice[diceNumber].lightNumber(position);
+          delay(50);
+          turnOffLeds(_AllDice[diceNumber],lenghtDice);
+          //_AllDice[diceNumber].turnOffDice();
+          delay(50);
+      };
     };
   };
 }
@@ -246,7 +296,7 @@ void setup() {
     pinMode(pin,OUTPUT);
     //digitalWrite(pin,HIGH);
   }
-  throwDice();
+
 }
 
 void loop() {
@@ -260,5 +310,6 @@ void loop() {
   //     delay(100);
   //   }
   // }
+  AllDice();
   
 }
