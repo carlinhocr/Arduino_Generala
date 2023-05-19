@@ -10,11 +10,11 @@ int _randomDiceNumber[_diceTotal] = {0,0,0,0,0}; //1, 2
 int _buttonStopDicePin[_diceTotal] = {11,12,12,12,12};
 
 //MyDice dice1(47,49,51,53);
-int dice1(38,40,42,44);
-int dice2(46,48,50,52);
-int dice3(31,33,35,37);
-int dice4(39,41,43,45);
-int dice5(47,49,51,53);
+int dice1[lenghtDice] = {38,40,42,44};
+int dice2[lenghtDice] = {46,48,50,52};
+int dice3[lenghtDice] = {31,33,35,37};
+int dice4[lenghtDice] = {39,41,43,45};
+int dice5[lenghtDice] = {47,49,51,53};
 int _AllDice[_diceTotal] = {dice1,dice2,dice3,dice4,dice5};
 
 void turnOnLeds (int toLight[], int lenghtToLight){
@@ -30,6 +30,8 @@ void turnOffLeds (int toLight[], int lenghtToLight){
 };
 
 void flashLeds(int toLight[], int lenghtToLight, int flashTimes = 5, int delayLed = 100){
+  Serial.println("En funcion flashleds");
+  //Serial.println(toLight);
   for (int i = 0; i < flashTimes; i++){
     turnOnLeds(toLight,lenghtToLight);
     delay(delayLed);
@@ -39,9 +41,11 @@ void flashLeds(int toLight[], int lenghtToLight, int flashTimes = 5, int delayLe
 }
 
 void acknowledgeButtonPress(int diceNumber){
+  Serial.println(diceNumber);
+  Serial.println(_AllDice[diceNumber]);
   flashLeds(_AllDice[diceNumber],lenghtDice,6,100);
   //_AllDice[diceNumber].flashAllLeds(diceNumber,2,200);
-  _AllDice[diceNumber].lightNumber(_randomDiceNumber[diceNumber]);
+  //_AllDice[diceNumber].lightNumber(_randomDiceNumber[diceNumber]);
 }
 /*
 void checkDiceStopStartButton(){
@@ -149,5 +153,7 @@ void loop() {
   //Serial.println(digitalRead(2));
   //dice1.rollDice();
   //twoDiceConcurrently();
-  acknowledgeButtonPress(2);
+  for  (int i = 0; i < 5; i ++){
+    acknowledgeButtonPress(i);
+  }
 }
