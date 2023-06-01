@@ -17,7 +17,7 @@ int _diceMiddleLeds = 0;
 int _diceCenterLed = 0;
 int _iterateDice[_diceTotal] = {1,1,1,1,1}; //1, 2
 int _randomDiceNumber[_diceTotal] = {0,0,0,0,0}; //1, 2
-int _buttonStopDicePin[_diceTotal] = {11,12,12,12,12};
+int _buttonStopDicePin[_diceTotal] = {8,9,10,11,12};
 
 //MyDice dice1(47,49,51,53);
 int dice1[lenghtDice] = {38,40,42,44};
@@ -289,14 +289,14 @@ void setup() {
   Serial.begin(9600);
   Serial.println("En funcion setup");
   pinMode(_buttonGeneral, INPUT_PULLUP);
-  pinMode(_diceButton1, INPUT_PULLUP);
-  pinMode(_diceButton2, INPUT_PULLUP);
   //pinMode(_diceButton3, INPUT_PULLUP);
   for  (int pin = 31; pin < 54; pin ++){
     pinMode(pin,OUTPUT);
+  }
+  for  (int pinButton = 0; pinButton < 5; pinButton ++){
+    pinMode(_buttonStopDicePin[pinButton],INPUT_PULLUP);
     //digitalWrite(pin,HIGH);
   }
-
 }
 
 void loop() {
